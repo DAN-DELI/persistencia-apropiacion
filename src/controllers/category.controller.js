@@ -1,5 +1,5 @@
 import { CategoryModel } from "../models/category.model.js";
-import { getAllProducts } from "./product.controller.js";
+import { ProductModel } from "../models/product.model.js";
 
 const getAllCategories = (req, res) => {
   const categories = CategoryModel.findAll();
@@ -87,7 +87,24 @@ const updateCategory = (req, res) => {
 const deleteCategory = (req, res) => {
   try {
     const { id } = req.params;
-    const isDeleted = CategoryModel.delete(Number(id));
+    const categoryId = Number(id);
+
+    // Validar si hay productos vinculados
+    const products = ProductModel.findAll();
+    const hasProducts = products.some((product) => product.category_id === categoryId);
+
+    if (hasProducts) {
+      return res.status(409).json({
+        success: false,
+        message: "No se puede eliminar la categoría porque tiene recursos vinculados",
+        data: [],
+        errors: [],
+      });
+    }
+
+    // Eliminar categoría
+    const isDeleted = CategoryModel.delete(categoryId);
+
     if (!isDeleted) {
       return res.status(404).json({
         success: false,
@@ -96,12 +113,15 @@ const deleteCategory = (req, res) => {
         errors: [],
       });
     }
+
+    // Éxito
     res.status(200).json({
       success: true,
       message: "Categoria eliminada correctamente",
       data: [],
       errors: [],
     });
+
   } catch (error) {
     res.status(500).json({
       success: false,
@@ -110,6 +130,6 @@ const deleteCategory = (req, res) => {
       errors: [],
     });
   }
-}
+};
 
 export { getAllCategories, getCategoryById, createCategory, updateCategory, deleteCategory };
