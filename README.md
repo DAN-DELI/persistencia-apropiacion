@@ -33,14 +33,18 @@ La siguiente estructura organiza el código fuente separando la configuración g
 ```bash
 .
 ├── src/
-│   ├── controllers/
-│   │   └── product.controller.js    # Manejo de peticiones y respuestas HTTP
-│   ├── data/
-│   │   └── products.data.js         # Fuente de datos (Arreglo en memoria)
-│   ├── models/
-│   │   └── product.model.js         # Lógica de acceso y manipulación de datos
-│   ├── routes/
-│   │   └── product.routes.js        # Definición de rutas y endpoints
+│   ├── controllers/                 # Manejo de peticiones y respuestas HTTP
+│   │   ├── product.controller.js    
+│   │   └── categories.controller.js  
+│   ├── data/                        # Fuente de datos (Arreglo en memoria)
+│   │   ├── products.data.js         
+│   │   └──categories.data.js
+│   ├── models/                      # Lógica de acceso y manipulación de datos
+│   │   ├── product.model.js         
+│   │   └──category.model.js
+│   ├── routes/                      # Definición de rutas y endpoints
+│   │   ├── product.routes.js        
+│   │   └── category.routes.js       
 │   └── app.js                       # Configuración y middlewares de Express
 ├── .gitignore                       # Archivos excluidos de Git (node_modules, .env)
 ├── package.json                     # Dependencias y scripts del proyecto
