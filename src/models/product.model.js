@@ -11,8 +11,16 @@ export const ProductModel = {
 
   create: (newProduct) => {
     const id = productsData.length + 1;
-    const productWithId = { id, ...newProduct };
+
+    const productWithId = {
+      id,
+      name: newProduct.name,
+      price: newProduct.price,
+      category_id: newProduct.category_id,
+    };
+
     productsData.push(productWithId);
+
     return productWithId;
   },
 

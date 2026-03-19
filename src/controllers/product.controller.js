@@ -29,7 +29,7 @@ const getProductById = (req, res) => {
       data: product,
       errors: [],
     });
-  } catch (error) { 
+  } catch (error) {
     res.status(500).json({
       success: false,
       message: "Error al procesar la búsqueda",
@@ -40,18 +40,18 @@ const getProductById = (req, res) => {
 };
 
 const createProduct = (req, res) => {
-  const { name, price } = req.body;
+  const { name, price, category_id } = req.body;
   // Validación simple
-  if (!name || !price) {
+  if (!name || !price || !category_id) {
     return res.status(400).json({
       success: false,
-      message: "Nombre y precio son obligatorios",
+      message: "Nombre, precio y categoria son obligatorios",
       data: [],
       errors: [],
     });
   }
 
-  const newProduct = ProductModel.create({ name, price });
+  const newProduct = ProductModel.create({ name, price, category_id });
   res.status(201).json({
     success: true,
     message: "Producto creado correctamente",
@@ -63,7 +63,7 @@ const createProduct = (req, res) => {
 const updateProduct = (req, res) => {
   const { id } = req.params;
   const updatedProduct = ProductModel.update(Number(id), req.body);
-  if (!updatedProduct) { 
+  if (!updatedProduct) {
     return res.status(404).json({
       success: false,
       message: `Producto con ID ${id} no encontrado`,
@@ -96,7 +96,7 @@ const deleteProduct = (req, res) => {
       message: "Producto eliminado correctamente",
       data: [],
       errors: [],
-    });    
+    });
   } catch (error) {
     res.status(500).json({
       success: false,
@@ -104,7 +104,7 @@ const deleteProduct = (req, res) => {
       data: [],
       errors: [],
     });
-  } 
+  }
 }
 
 export { getAllProducts, getProductById, createProduct, updateProduct, deleteProduct };
