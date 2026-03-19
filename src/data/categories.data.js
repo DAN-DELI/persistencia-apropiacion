@@ -1,5 +1,3 @@
-// comentario: El nombre del archivo es categories-data.js. ya que si se usaba "categories.data.js", se generaba un error como si no se encontrase este archivo.
-
 const categoriesData = [
   { id: 1, name: "Sistemas y Equipos" },
   { id: 2, name: "Periféricos" },

@@ -1,5 +1,5 @@
-
-import { CategoryModel } from '../data./categories.data';
+import { CategoryModel } from "../models/category.model.js";
+import { getAllProducts } from "./product.controller.js";
 
 const getAllCategories = (req, res) => {
   const categories = CategoryModel.findAll();
@@ -32,7 +32,7 @@ const getCategoryById = (req, res) => {
       errors: [],
     });
 
-  } catch (error) { 
+  } catch (error) {
     res.status(500).json({
       success: false,
       message: "Error al procesar la búsqueda",
@@ -67,7 +67,7 @@ const createCategory = (req, res) => {
 const updateCategory = (req, res) => {
   const { id } = req.params;
   const updatedCategory = CategoryModel.update(Number(id), req.body);
-  if (!updatedCategory) { 
+  if (!updatedCategory) {
     return res.status(404).json({
       success: false,
       message: `Categoria con ID ${id} no encontrado`,
@@ -101,7 +101,7 @@ const deleteCategory = (req, res) => {
       message: "Categoria eliminada correctamente",
       data: [],
       errors: [],
-    });    
+    });
   } catch (error) {
     res.status(500).json({
       success: false,
@@ -109,7 +109,7 @@ const deleteCategory = (req, res) => {
       data: [],
       errors: [],
     });
-  } 
+  }
 }
 
 export { getAllCategories, getCategoryById, createCategory, updateCategory, deleteCategory };

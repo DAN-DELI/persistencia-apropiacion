@@ -1,4 +1,4 @@
-import categoriesData from "../data/categories-data.js";
+import categoriesData from "../data/categories.data.js";
 
 export const CategoryModel = {
   findAll: () => {
